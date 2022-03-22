@@ -24,9 +24,9 @@ RUN wget https://ftp.debian.org/debian/pool/main/b/binutils/binutils-source_2.31
     cp usr/src/binutils/patches/129_multiarch_libpath.patch /home/develop
 
 # Download and install the latest version of crosstool-ng
-RUN git clone -b master --single-branch --depth 1 \
-        https://github.com/crosstool-ng/crosstool-ng.git
+RUN git clone -b master https://github.com/crosstool-ng/crosstool-ng.git
 WORKDIR /home/develop/crosstool-ng
+RUN git checkout cd7098d41b1719f1ec8c5720d601d153dd0f67f5
 RUN git show --summary && \
     ./bootstrap && \
     mkdir build && cd build && \
@@ -35,4 +35,4 @@ RUN git show --summary && \
     make install &&  \
     cd .. && rm -rf build
 ENV PATH=/home/develop/.local/bin:$PATH
-WORKDIR /home/develop 
+WORKDIR /home/develop
